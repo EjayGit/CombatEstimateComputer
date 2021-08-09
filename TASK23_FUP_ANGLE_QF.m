@@ -1,0 +1,28 @@
+% Task 23: Angle Quality Factor
+
+function [ FUP_ANGLE_QF ] = TASK23_FUP_ANGLE_QF( FUP_LAT, FUP_LON, EN_LAT, EN_LON, ANGLE_LINE, FUP_WEIGHT_ANGLE )
+
+ANGLE_DEG_FUP_EN = TASK19_ANGLE( FUP_LAT, FUP_LON, EN_LAT, EN_LON );
+
+ANGLE_DEG_LINE_EN = ANGLE_DEG_FUP_EN - 90 + ANGLE_LINE;
+
+ANGLE_RAD_LINE_EN = degtorad( ANGLE_DEG_LINE_EN );
+
+FUP_ANGLE_QF = sin( ANGLE_RAD_LINE_EN );
+
+FUP_ANGLE_QF = abs( FUP_ANGLE_QF );
+
+if FUP_WEIGHT_ANGLE == 3
+    % Do nothing.
+elseif FUP_WEIGHT_ANGLE < 3
+    
+    FUP_ANGLE_QF = ( ( FUP_WEIGHT_ANGLE - 1 ) * ( ( FUP_ANGLE_QF ) / 2 ) );
+    
+elseif FUP_WEIGHT_ANGLE > 3
+    
+    FUP_ANGLE_QF = ( FUP_ANGLE_QF + ( ( FUP_WEIGHT_ANGLE - 3 ) * ( ( 1 - FUP_ANGLE_QF ) / 2 ) ) );
+    
+end
+
+end
+
